@@ -1,0 +1,13 @@
+{
+    "name": "tienda-juegos",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "build:css": "tailwindcss -i ./src/input.css -o ./public/output.css",
+        "watch:css": "tailwindcss -i ./src/input.css -o ./public/output.css --watch"
+    },
+    "devDependencies": {
+        "@tailwindcss/cli": "4.1.0",
+        "tailwindcss": "4.1.0"
+    }
+}

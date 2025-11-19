@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="output.css">
+</head>
+
+<body class="bg-gray-950 text-white">
+
+    <!-- NAVBAR -->
+    <header class="w-full bg-gray-900 py-4 shadow-lg">
+        <nav class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+            <h1 class="text-2xl font-extrabold tracking-wide text-purple-400">Carrito</h1>
+
+            <a href="index.html"
+               class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg">
+                Volver a la tienda
+            </a>
+        </nav>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-10">
+
+        <h2 class="text-3xl font-bold text-purple-300 mb-6">
+            Productos en el Carrito
+        </h2>
+
+        <!-- BOTÓN PARA VACIAR CARRITO -->
+        <button id="vaciar-carrito"
+            class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded mb-6 transition">
+            Vaciar carrito
+        </button>
+
+        <!-- CONTENEDOR DE PRODUCTOS -->
+        <div id="lista-carrito" class="space-y-4"></div>
+
+        <!-- TOTAL -->
+        <h3 id="total" class="text-2xl font-bold text-green-400 mt-8"></h3>
+
+    </main>
+
+    <!-- SCRIPT COMPLETO -->
+    <script>
+        function cargarCarrito() {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            let lista = document.getElementById("lista-carrito");
+            let total = 0;
+
+            if (carrito.length === 0) {
+                lista.innerHTML = "<p class='text-purple-300'>El carrito está vacío.</p>";
+                document.getElementById("total").innerText = "";
+                return;
+            }
+
+            lista.innerHTML = "";
+
+            carrito.forEach((item, index) => {
+                total += item.precio;
+
+                lista.innerHTML += `
+                    <div class="bg-gray-900 border border-purple-500/30 p-4 rounded-lg flex justify-between items-center">
+                        <div>
+                            <p class="text-lg font-semibold text-purple-300">${item.nombre}</p>
+                            <p class="text-green-400 font-bold">$${item.precio.toFixed(2)}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById("total").innerText =
+                "Total: $" + total.toFixed(2);
+        }
+
+        // Vaciar carrito
+        document.getElementById("vaciar-carrito").addEventListener("click", () => {
+            localStorage.removeItem("carrito");
+            location.reload();
+        });
+
+        cargarCarrito();
+    </script>
+
+</body>
+</html>
