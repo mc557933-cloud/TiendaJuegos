@@ -1,5 +1,7 @@
     console.log("SCRIPT INICIADO ✔✔✔");
 
+// Comentario agregado para commit 3
+
 // --------- CONFIGURACIÓN BÁSICA ----------
 const API_BASE = "https://www.cheapshark.com/api/1.0";
 const PAGE_SIZE = 12;
@@ -124,7 +126,7 @@ function closeModal() {
     modal.classList.add("hidden");
 }
 
-// --------- OBTENER OFERTAS ----------
+// ---------- OBTENER OFERTAS ----------
 async function fetchDeals({ page = 0, append = false } = {}) {
     if (isLoading) return;
     isLoading = true;
@@ -132,24 +134,19 @@ async function fetchDeals({ page = 0, append = false } = {}) {
     showLoader();
 
     try {
-        const params = new URLSearchParams({
-            pageNumber: page,
-            pageSize: PAGE_SIZE,
-            storeID: currentStore,
-            onSale: "1"
-        });
 
+        // Construimos la URL manualmente
         let query = `pageNumber=${page}&pageSize=${PAGE_SIZE}&onSale=1`;
 
-if (currentStore) query += `&storeID=${currentStore}`;
-if (currentSort) query += `&sortBy=${currentSort}`;
+        if (currentStore) query += `&storeID=${currentStore}`;
+        if (currentSort) query += `&sortBy=${currentSort}`;
 
-const url = `${API_BASE}/deals?${query}`;
+        const url = `${API_BASE}/deals?${query}`;
 
-console.log("URL FINAL:", url);
+        console.log("URL FINAL:", url);
 
-const res = await fetch(url);
-const data = await res.json();
+        const res = await fetch(url);
+        const data = await res.json();
 
         if (!append) grid.innerHTML = "";
 
@@ -241,6 +238,7 @@ closeModalBtn.addEventListener("click", closeModal);
 modal.addEventListener("click", e => {
     if (e.target === modal) closeModal();
 });
+// Ajuste menor para el commit final
 
 // --------- INICIALIZACIÓN ----------
 fetchDeals({ page: 0 });    
