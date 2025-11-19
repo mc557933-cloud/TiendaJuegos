@@ -1,5 +1,5 @@
 # Tienda de Juegos
-Proyecto escolar que muestra ofertas de videojuegos utilizando la API de CheapShark.
+Proyecto que muestra ofertas de videojuegos utilizando la API de CheapShark.
 
 ## Funcionalidades
 - Buscar juegos por título.
